@@ -1,0 +1,312 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"] - KarisBrook</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/css/owl.theme.css">
+    <link rel="stylesheet" href="~/css/owl.transitions.css">
+    <link rel="stylesheet" href="~/css/nivo-slider.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/meanmenu.min.css">
+    <link rel="stylesheet" href="~/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="stylesheet" href="~/css/style-slider.css">
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+    <!-- HEADER-AREA START -->
+    <header class="header-area">
+        <!-- HEADER-TOP START -->
+        <div class="header-top hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="top-link">
+                            <ul class="link">
+                                <!-- Корзина -->
+                                <li>
+                                    <a href="/Cart"><i class="fa fa-shopping-cart"></i> Корзина </a>
+                                    <!-- Мини-корзина (остается как есть, позже сделаем динамической) -->
+                                </li>
+
+                                <!-- Аутентификация -->
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="/Account/Profile"><i class="fa fa-user"></i> @User.Identity.Name </a></li>
+                                    <li>
+                                        <form asp-action="Logout" asp-controller="Account" method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-link" style="padding:0; color:inherit; border:none; background:none;">
+                                                <i class="fa fa-sign-out"></i> Выход
+                                            </button>
+                                        </form>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Account/Login"><i class="fa fa-user"></i> Вход</a></li>
+                                    <li><a href="/Account/Register"><i class="fa fa-unlock-alt"></i> Регистрация</a></li>
+                                }
+
+                                <!-- Прочие ссылки (пока статические) -->
+                                <li><a href="/Wishlist"><i class="fa fa-heart"></i> Вишлист </a></li>
+                                <li><a href="/Compare"><i class="fa fa-signal"></i> Сравнение </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- HEADER-TOP END -->
+        <!-- HEADER-MIDDLE START -->
+        <div class="header-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="logo">
+                            <a href="/" title="KarisBrook"><img src="~/logo/logo1.png" alt="KarisBrook"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-5 col-xs-12">
+                        <div class="quick-access">
+                            <div class="search-by-category">
+                                <div class="header-search">
+                                    <form action="#">
+                                        <input type="text" placeholder="Search">
+                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="header-menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="/Blog">Блог</a>
+                                    <li><a href="/About">О нас</a>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- HEADER-MIDDLE END -->
+        <!-- START MAINMENU-AREA -->
+        <div class="mainmenu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mainmenu hidden-sm hidden-xs">
+                            <nav>
+                                <ul>
+                                    <li><a href="/New">Новинки</a></li>
+                                    <li>
+                                        <a href="/Products/List">Одежда</a>
+                                        <ul>
+                                            <li><a href="/Products/List?category=polo">Поло</a></li>
+                                            <li><a href="/Products/List?category=sweater">Свитера</a></li>
+                                            <li><a href="/Products/List?category=shirts">Рубашки</a></li>
+                                            <li><a href="/Products/List?category=jackets">Куртки</a></li>
+                                            <li><a href="/Products/List?category=trousers">Брюки</a></li>
+                                            <li><a href="/Products/List?category=coat">Пальто</a></li>
+                                            <li><a href="/Products/List?category=tee">Футболки</a></li>
+                                            <li><a href="/Products/List?category=suit jacket">Пиджаки</a></li>
+                                            <li><a href="/Products/List?category=underwear">Нижнее бельё</a></li>
+                                            <li><a href="/Products/List?category=hoodie">Худи</a></li>
+                                            <li><a href="/Products/List?category=jeans">Джинсы</a></li>
+                                            <li><a href="/Products/List?category=vests">Жилеты</a></li>
+                                            <li><a href="/Products/List?category=tops">Топы</a></li>
+                                            <li><a href="/Products/List?category=blouses">Блузки</a></li>
+                                            <li><a href="/Products/List?category=shorts">Шорты</a></li>
+                                            <li><a href="/Products/List?category=skirts">Юбки</a></li>
+                                            <li><a href="/Products/List?category=dresses">Платья</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Products/List">Аксессуары</a>
+                                        <ul>
+                                            <li><a href="/Products/List?category=rocket handkerchiefs">Карманные платки</a></li>
+                                            <li><a href="/Products/List?category=umbrellas">Зонты</a></li>
+                                            <li><a href="/Products/List?category=glasses">Очки</a></li>
+                                            <li><a href="/Products/List?category=clock">Часы</a></li>
+                                            <li><a href="/Products/List?category=necktie">Галстуки</a></li>
+                                            <li><a href="/Products/List?category=socks">Носки</a></li>
+                                            <li><a href="/Products/List?category=belts">Ремни</a></li>
+                                            <li><a href="/Products/List?category=cufflinks and clips">Запонки и зажимы</a></li>
+                                            <li><a href="/Products/List?category=scarves">Шарфы</a></li>
+                                            <li><a href="/Products/List?category=gloves">Перчатки</a></li>
+                                            <li><a href="/Products/List?category=suspenders">Подтяжки</a></li>
+                                            <li><a href="/Products/List?category=bags">Сумки</a></li>
+                                            <li><a href="/Products/List?category=chokers">Чокеры</a></li>
+                                            <li><a href="/Products/List?category=rims">Ободки</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Products/List">Головные уборы</a>
+                                        <ul>
+                                            <li><a href="/Products/List?category=hats">Шляпы</a></li>
+                                            <li><a href="/Products/List?category=ski hat">Шапки</a></li>
+                                            <li><a href="/Products/List?category=panama">Панама</a></li>
+                                            <li><a href="/Products/List?category=veil">Вуаль</a></li>
+                                            <li><a href="/Products/List?category=cap">Кепка</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Products/List">Обувь</a>
+                                        <ul>
+                                            <li><a href="/Products/List?category=boots">Ботинки</a></li>
+                                            <li><a href="/Products/List?category=wellingtons">Сапоги</a></li>
+                                            <li><a href="/Products/List?category=moccasins">Мокасины</a></li>
+                                            <li><a href="/Products/List?category=sneakers">Кроссовки</a></li>
+                                            <li><a href="/Products/List?category=slippers">Тапочки</a></li>
+                                            <li><a href="/Products/List?category=slates">Сланцы</a></li>
+                                            <li><a href="/Products/List?category=ballet flats">Балетки</a></li>
+                                            <li><a href="/Products/List?category=sandals">Босоножки</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Products/List">Бренды</a>
+                                        <ul>
+                                            <li><a href="/Products/List?brand=Rowing Blazers">Rowing Blazers</a></li>
+                                            <li><a href="/Products/List?brand=Warm & Wonderful">Warm & Wonderful</a></li>
+                                            <li><a href="/Products/List?brand=Gyles & George">Gyles & George</a></li>
+                                            <li><a href="/Products/List?brand=Arthur Ashe">Arthur Ashe</a></li>
+                                            <li><a href="/Products/List?brand=Brawl Stars">Brawl Stars</a></li>
+                                            <li><a href="/Products/List?brand=Artemis">Artemis</a></li>
+                                            <li><a href="/Products/List?brand=D. Molina">D. Molina</a></li>
+                                            <li><a href="/Products/List?brand=Construe">Construe</a></li>
+                                            <li><a href="/Products/List?brand=Hood">Hood</a></li>
+                                            <li><a href="/Products/List?brand=Strellson">Strellson</a></li>
+                                            <li><a href="/Products/List?brand=Lindbergh">Lindbergh</a></li>
+                                            <li><a href="/Products/List?brand=Gant">Gant</a></li>
+                                            <li><a href="/Products/List?brand=Boast">Boast</a></li>
+                                            <li><a href="/Products/List?brand=Tintin">Tintin</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Products/List">Разное</a>
+                                        <ul>
+                                            <li><a href="/Products/List?category=gifts">Подарки</a></li>
+                                            <li><a href="/Products/List?category=household goods">Товары для дома</a></li>
+                                            <li><a href="/Products/List?category=combs">Расчёски</a></li>
+                                            <li><a href="/Products/List?category=parfum">Духи</a></li>
+                                            <li><a href="/Products/List?category=tea">Чай</a></li>
+                                            <li><a href="/Products/List?category=face masks">Маски для лица</a></li>
+                                            <li><a href="/Products/List?category=care-products">Уход</a></li>
+                                            <li><a href="/Products/List?category=other">Другое</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/Sales">Распродажи</a></li>
+                                    <li><a href="/Favourites">Избранное</a></li>
+                                    <li><a href="/Collections">Коллекции</a></li>
+                                    <li><a href="/Random">Рандом</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN-MENU-AREA -->
+        <!-- Start Mobile-menu -->
+        <div class="mobile-menu-area hidden-md hidden-lg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <!-- Аналогично основному меню, но в сокращенном виде -->
+                                <li><a href="/New">Новинки</a></li>
+                                <li>
+                                    <a href="/Products/List">Одежда</a>
+                                    <ul>
+                                        <li><a href="/Products/List?category=polo">Поло</a></li>
+                                        <li><a href="/Products/List?category=sweater">Свитера</a></li>
+                                        <!-- и так далее -->
+                                    </ul>
+                                </li>
+                                <!-- Остальные пункты меню... -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Mobile-menu -->
+    </header>
+    <!-- HEADER AREA END -->
+    <!-- START MAIN CONTENT -->
+    @RenderBody()
+    <!-- END MAIN CONTENT -->
+    <!-- FOOTER-AREA START -->
+    <footer class="footer-area">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="logo">
+                            <a href="/" title="KarisBrook"><img src="~/logo/logo2.png" alt="KarisBrook"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-4 col-xs-12">
+                        <label class="hidden-sm hidden-xs">Подпишитесь на нашу рассылку:</label>
+                        <div class="subscribe">
+                            <form action="#">
+                                <input type="text" placeholder="Enter Your E-mail">
+                                <button type="submit">Подпешись</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <label class="hidden-sm hidden-xs">Оставайтесь на связи:</label>
+                        <div class="social-media">
+                            <a href="#"><i class="fa fa-facebook fb"></i></a>
+                            <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                            <a href="#"><i class="fa fa-twitter tt"></i></a>
+                            <a href="#"><i class="fa fa-youtube yt"></i></a>
+                            <a href="#"><i class="fa fa-linkedin li"></i></a>
+                            <a href="#"><i class="fa fa-rss rs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER-AREA END -->
+    <!-- SCRIPTS -->
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/jquery.meanmenu.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/countdon.min.js"></script>
+    <script src="~/js/jquery-price-slider.js"></script>
+    <script src="~/js/jquery.nivo.slider.js" type="text/javascript"></script>
+    <script src="~/js/imagezoom.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/style-slider.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

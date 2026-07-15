@@ -1,0 +1,53 @@
+﻿@model List<KarisBrook.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+<div class="container">
+    <h2>Оформление заказа</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post" asp-action="Create">
+                <div class="form-group">
+                    <label for="shippingAddress">Адрес доставки</label>
+                    <input type="text" name="shippingAddress" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Способ оплаты</label>
+                    <select name="paymentMethod" class="form-control" required>
+                        <option value="">Выберите способ...</option>
+                        <option value="Оплата при получении">Оплата при получении</option>
+                        <option value="Картой онлайн">Картой онлайн</option>
+                        <option value="Перевод на карту">Перевод на карту</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Комментарий к заказу</label>
+                    <textarea name="comment" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Подтвердить заказ</button>
+                <a href="@Url.Action("Index", "Cart")" class="btn btn-secondary">Вернуться в корзину</a>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Ваш заказ</h4>
+            <ul class="list-group">
+                @foreach (var item in Model)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @item.Product.Name
+                        <span>@item.Quantity × @item.Product.Price ₽ = @(item.Product.Price * item.Quantity) ₽</span>
+                    </li>
+                }
+                <li class="list-group-item d-flex justify-content-between align-items-center font-weight-bold">
+                    Итого:
+                    <span>@Model.Sum(i => i.Product.Price * i.Quantity) ₽</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

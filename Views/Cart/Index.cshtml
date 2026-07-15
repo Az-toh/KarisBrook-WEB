@@ -1,0 +1,55 @@
+﻿@model List<KarisBrook.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<div class="container">
+    <h2>Корзина</h2>
+
+    @if (!Model.Any())
+    {
+        <p>Ваша корзина пуста.</p>
+        <a href="@Url.Action("List", "Products")" class="btn btn-primary">Перейти в каталог</a>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Product.Price ₽</td>
+                        <td>
+                            <form method="post" asp-action="Update" asp-route-id="@item.Id">
+                                <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control" style="width:70px; display:inline-block;">
+                                <button type="submit" class="btn btn-sm btn-primary">Обновить</button>
+                            </form>
+                        </td>
+                        <td>@(item.Product.Price * item.Quantity) ₽</td>
+                        <td>
+                            <form method="post" asp-action="Remove" asp-route-id="@item.Id">
+                                <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="text-right">
+            <h4>Итого: @Model.Sum(i => i.Product.Price * i.Quantity) ₽</h4>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Продолжить покупки</a>
+            <a href="@Url.Action("Checkout", "Order")" class="btn btn-success">Оформить заказ</a>
+        </div>
+    }
+</div>

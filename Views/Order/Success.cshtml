@@ -1,0 +1,28 @@
+﻿@model KarisBrook.Models.Order
+
+@{
+    ViewData["Title"] = "Заказ оформлен";
+}
+
+<div class="container">
+    <h2>Спасибо за заказ!</h2>
+    <p>Ваш заказ #@Model.Id успешно оформлен.</p>
+    <p><strong>Общая сумма:</strong> @Model.TotalPrice ₽</p>
+    <p><strong>Статус:</strong> @Model.Status</p>
+    <p><strong>Адрес доставки:</strong> @Model.ShippingAddress</p>
+    <p><strong>Способ оплаты:</strong> @Model.PaymentMethod</p>
+
+    <h4>Состав заказа</h4>
+    <ul class="list-group">
+        @foreach (var item in Model.OrderItems)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                @item.Product.Name
+                <span>@item.Quantity × @item.PriceAtPurchaseTime ₽ = @(item.Quantity * item.PriceAtPurchaseTime) ₽</span>
+            </li>
+        }
+    </ul>
+
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">На главную</a>
+    <a href="@Url.Action("History", "Order")" class="btn btn-secondary mt-3">История заказов</a>
+</div>

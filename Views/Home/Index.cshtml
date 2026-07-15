@@ -1,0 +1,410 @@
+﻿@model KarisBrook.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Главная - KarisBrook";
+}
+
+<!-- Category slider area start -->
+<div class="category-slider-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="slider-area">
+                    <div class="bend niceties preview-1">
+                        <div id="ensign-nivoslider" class="slides">
+                            <img src="~/sliders/bg1.jpg" alt="KarisBrook" title="#slider-direction-1" />
+                            <img src="~/sliders/bg2.jpg" alt="KarisBrook" title="#slider-direction-2" />
+                            <img src="~/sliders/bg3.jpg" alt="KarisBrook" title="#slider-direction-3" />
+                        </div>
+                        <!-- direction 1 -->
+                        <div id="slider-direction-1" class="t-lfr slider-direction">
+                            <div class="slider-progress"></div>
+                            <div class="layer-1-1 ">
+                                <h1 class="title1">СОЛНЦЕЗАШИТНЫЕ ОЧКИ KNOX</h1>
+                            </div>
+                            <div class="layer-1-2">
+                                <p class="title2">Смотри на жизнь ясно</p>
+                            </div>
+                            <div class="layer-1-3">
+                                <h2 class="title3">900₽</h2>
+                            </div>
+                            <div class="layer-1-4">
+                                <a href="#" class="title4">Купить сейчас</a>
+                            </div>
+                        </div>
+                        <!-- direction 2 -->
+                        <div id="slider-direction-2" class="slider-direction">
+                            <div class="slider-progress"></div>
+                            <div class="layer-2-1">
+                                <h1 class="title1">BENCHGRADE CAPTOE BAIMORAI</h1>
+                            </div>
+                            <div class="layer-2-3">
+                                <a href="#" class="title3">Купить сейчас</a>
+                            </div>
+                        </div>
+                        <!-- direction 3 -->
+                        <div id="slider-direction-3" class="slider-direction">
+                            <div class="slider-progress"></div>
+                            <div class="layer-3-1">
+                                <h2 class="title1">AME DE THE VERT</h2>
+                            </div>
+                            <div class="layer-3-2">
+                                <h1 class="title2">Особеное предложение</h1>
+                            </div>
+                            <div class="layer-3-3">
+                                <p class="title3">Ame de Thé Vert (душа зеленого чая) - зеленый ароматический одеколон для мужчин и женщин.</p>
+                            </div>
+                            <div class="layer-3-4">
+                                <a href="#" class="title4">Купить сейчас</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Category slider area End -->
+
+<section class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11 col-sm-12 col-xs-12">
+                <!-- START PRODUCT-AREA -->
+                <div class="product-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="area-title">
+                                <h3 class="title-group gfont-1">Хиты продаж</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <!-- Start Product -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="product carosel-navigation">
+                                <div class="tab-content">
+                                    <div class="row">
+                                        <div class="fullwidth">
+                                            <div class="box">
+                                                <button onclick="asd_swipe(0)">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </button>
+                                                <button onclick="asd_swipe(1)">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </button>
+                                            </div>
+                                            <div class='asd_outer'>
+                                                <div id='asd_strip' class='asd_strip'>
+                                                   @foreach (var product in Model.BestSellers)
+{
+    <div class="asd_card">
+        <div class="single-product">
+            <div class="product-img">
+                <a href="@Url.Action("Details", "Products", new { id = product.Id })">
+                    <img class="primary-img" title="@product.Name" src="~@product.ImagePath" alt="@product.Name">
+                </a>    
+            </div>
+            <div class="product-description">
+                <h5><a href="@Url.Action("Details", "Products", new { id = product.Id })">@product.Name</a></h5>
+                <div class="price-box">
+                    @if (product.OldPrice.HasValue)
+                    {
+                        <span class="price">@product.Price ₽</span>
+                        <span class="old-price">@product.OldPrice ₽</span>
+                    }
+                    else
+                    {
+                        <span class="price">@product.Price ₽</span>
+                    }
+                </div>
+                <span class="rating">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= Math.Round(product.Rating))
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star-o"></i>
+                        }
+                    }
+                </span>
+            </div>
+            <div class="product-action">
+                <div class="button-group">
+                    <!-- КНОПКА "В КОРЗИНУ" УБРАНА -->
+                    <div class="product-button-2">
+                        <a href="#" data-toggle="tooltip" title="Вишлист"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" data-toggle="tooltip" title="Сравнение"><i class="fa fa-signal"></i></a>
+                        <a href="@Url.Action("Details", "Products", new { id = product.Id })" class="modal-view" title="Подробнее"><i class="fa fa-search-plus"></i></a>
+                    </div>
+                </div>
+            </div>												
+        
+    
+}>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Product -->
+                </div>
+                <!-- END PRODUCT-AREA -->
+                <!-- START PRODUCT-AREA (Коллекции - статика) -->
+                <div class="small-product-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="area-title">
+                                <h3 class="title-group gfont-1">Коллекции</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start Product -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="product carosel-navigation">
+                                <div class="tab-content">
+                                    <div class="row">
+                                        <div class="fullwidth">
+                                            <div class="box">
+                                                <button onclick="asd_swipe_1(0)">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </button>
+                                                <button onclick="asd_swipe_1(1)">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </button>
+                                            </div>
+                                            <div class='asd_outer'>
+                                                <div id='asd_strip_1' class='asd_strip_1'>
+                                                    <div class="asd_card">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="arthur ashe.html">
+                                                                    <img class="primary-img" src="~/collection-cads/1.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="gucci vault.html">
+                                                                    <img class="primary-img" src="~/collection-cads/2.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="grateful & dead.html">
+                                                                    <img class="primary-img" src="~/collection-cads/3.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="asd_card">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="warm & wonderful.html">
+                                                                    <img class="primary-img" src="~/collection-cads/4.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="seiko.html">
+                                                                    <img class="primary-img" src="~/collection-cads/5.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="summer 23.html">
+                                                                    <img class="primary-img" src="~/collection-cads/6.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="asd_card">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="rowing blazers.html">
+                                                                    <img class="primary-img" src="~/collection-cads/7.jpg" alt="Product">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="gyles and george.html">
+                                                                    <img class="primary-img" src="~/collection-cads/8.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="artemis.html">
+                                                                    <img class="primary-img" src="~/collection-cads/9.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="asd_card">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="firstport.html">
+                                                                    <img class="primary-img" src="~/collection-cads/10.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="hood.html">
+                                                                    <img class="primary-img" src="~/collection-cads/11.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="hozen.html">
+                                                                    <img class="primary-img" src="~/collection-cads/12.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="asd_card">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="LFANT.html">
+                                                                    <img class="primary-img" src="~/collection-cads/13.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="SPERRY.html">
+                                                                    <img class="primary-img" src="~/collection-cads/14.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="winnie-the-pooh.html">
+                                                                    <img class="primary-img" src="~/collection-cads/15.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Product -->
+                        </div>
+                        <!-- END SMALL-PRODUCT-AREA -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- START BRAND-LOGO-AREA -->
+    <div class="brand-logo-area carosel-navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="area-title">
+                        <h3 class="title-group gfont-1">Бренды</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="fullwidth">
+                    <div class="box">
+                        <button onclick="asd_swipe_2(0)">
+                            <i class="fa fa-angle-left"></i>
+                        </button>
+                        <button onclick="asd_swipe_2(1)">
+                            <i class="fa fa-angle-right"></i>
+                        </button>
+                    </div>
+                    <div class='asd_outer'>
+                        <div id='asd_strip_2' class='asd_strip_2'>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="arthur ashe.html"><img src="~/brand logo/1.png" alt="arthur ashe"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="gucci vault.html"><img src="~/brand logo/2.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="grateful & dead.html"><img src="~/brand logo/3.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="warm & wonderful.html"><img src="~/brand logo/4.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="seiko.html"><img src="~/brand logo/5.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="rowing blazers.html"><img src="~/brand logo/6.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="gyles and george.html"><img src="~/brand logo/7.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="artemis.html"><img src="~/brand logo/8.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="asd_card">
+                                <div class="col-md-2">
+                                    <div class="single-brand-logo">
+                                        <a href="hood.html"><img src="~/brand logo/9.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BRAND-LOGO-AREA -->
+</section>

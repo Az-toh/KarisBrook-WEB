@@ -1,0 +1,49 @@
+﻿@model KarisBrook.Models.ProductsListViewModel
+
+@{
+    ViewData["Title"] = "Каталог";
+}
+
+<div class="container">
+    <div class="row">
+        <!-- Фильтры -->
+        <div class="col-md-3">
+            <div class="filter-box">
+                <h4>Категории</h4>
+                <ul>
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <li><a href="@Url.Action("List", new { category = cat.Slug })">@cat.Name</a></li>
+                    }
+                </ul>
+
+                <h4>Бренды</h4>
+                <ul>
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <li><a href="@Url.Action("List", new { brand = brand.Name })">@brand.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Список товаров -->
+        <div class="col-md-9">
+            <div class="row">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <a href="@Url.Action("Details", new { id = product.Id })">
+                                <img src="~@product.ImagePath" alt="@product.Name" class="img-fluid">
+                            </a>
+                            <h5>@product.Name</h5>
+                            <p>@product.Price₽</p>
+                            <a href="@Url.Action("Details", new { id = product.Id })" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
