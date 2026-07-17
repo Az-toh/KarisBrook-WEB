@@ -18,6 +18,7 @@ namespace KarisBrook.Data
         public DbSet<CartItem> CartItems { get; set; } // <-- ЭТО ДОЛЖНО БЫТЬ
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<WishlistItem> WishlistItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

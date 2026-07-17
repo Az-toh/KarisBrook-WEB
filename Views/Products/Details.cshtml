@@ -19,6 +19,11 @@
                 <p><s>@Model.OldPrice ₽</s> <span class="text-danger">Скидка!</span></p>
             }
             <p>@Model.Description</p>
+            <form method="post" asp-action="Add" asp-controller="Wishlist" asp-route-productId="@Model.Id">
+                <button type="submit" class="btn btn-outline-danger mt-2">
+                    <i class="fa fa-heart"></i> В лист ожидания
+                </button>
+            </form>
 
             <!-- ФОРМА ДЛЯ ДОБАВЛЕНИЯ В КОРЗИНУ -->
             <form method="post" asp-action="Add" asp-controller="Cart" asp-route-productId="@Model.Id">

@@ -1,0 +1,46 @@
+﻿@model List<KarisBrook.Models.WishlistItem>
+
+@{
+    ViewData["Title"] = "Лист ожидания";
+}
+
+<div class="container">
+    <h2>Лист ожидания</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <p>Ваш лист ожидания пуст.</p>
+        <a href="@Url.Action("List", "Products")" class="btn btn-primary">Перейти в каталог</a>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="@Url.Action("Details", "Products", new { id = item.ProductId })">
+                            <img src="~@item.Product.ImagePath" class="card-img-top" alt="@item.Product.Name" style="height: 200px; object-fit: cover;">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Product.Name</h5>
+                            <p class="card-text">@item.Product.Price ₽</p>
+                            <p class="card-text"><small class="text-muted">Добавлен: @item.AddedDate.ToString("dd.MM.yyyy")</small></p>
+                            <div class="d-flex justify-content-between">
+                                <a href="@Url.Action("Details", "Products", new { id = item.ProductId })" class="btn btn-primary btn-sm">Подробнее</a>
+                                <form method="post" asp-action="Remove" asp-route-id="@item.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

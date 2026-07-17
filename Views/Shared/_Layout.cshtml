@@ -49,7 +49,13 @@
 
 
                                 <!-- Аутентификация -->
-                                @if (User.Identity.IsAuthenticated)
+                                @if (User.Identity.IsAuthenticated){
+                                <li><a href="@Url.Action("Index", "Wishlist")"><i class="fa fa-heart"></i> Лист ожидания</a></li>
+    <li><a href="/Cart"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+    <li><a href="@Url.Action("History", "Order")"><i class="fa fa-history"></i> История заказов</a></li>
+    <li><a href="/Account/Profile"><i class="fa fa-user"></i> @User.Identity.Name</a></li>
+    <!-- ... -->
+                                }
                                 {
                                    
                                         <!-- ИСТОРИЯ ЗАКАЗОВ (ДОБАВЛЕНА) -->
